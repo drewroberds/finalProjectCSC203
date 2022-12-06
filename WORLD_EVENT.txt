@@ -1,0 +1,28 @@
+intial ideas
+- click drops a yeti mountain, yeti spawns, grabs dudes, and pulls them into his mountain.
+- after a certain amount of time, the dudes escape
+
+
+idea 2.0
+- yeti mountain discolors the ground around it
+- when dudes escape, they are "afflicted"
+- afflicted dudes must eat a fairy or die in x world cycles
+	-if they eat a fairy, they revert to a dude_NF
+
+- additional options
+	- button press to spawn dudes/fairies maybe trees or houses?
+	- there are guy and girl dudes who bang when they are adjacent and have baby
+		- % chance
+	- dudes would come out of mountain naked but with a censor bar over hips
+		- yeti steals dudes clothes and starts doing dude activityy
+		- dude respawns after a period of time and tries to beat up yeti_dude
+		- yeti_dude goes comatose
+		- fairy's revive yeti dude as ronnie coleman posing
+
+
+entities to add
+- yeti_not_dude
+- yeti_dude
+- dude_naked
+- ronnie_coleman (varying poses) - "yea buddy!"
+	- sound bite of him squating (once or multiple times)
