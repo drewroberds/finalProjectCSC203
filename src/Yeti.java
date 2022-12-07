@@ -5,7 +5,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public abstract class Yeti extends MovableEntity {
-    public static final double YETI_ACTION_PERIOD = .25;
+    public static final double YETI_ACTION_PERIOD = .55;
     public static final double YETI_ANIMATION_PERIOD = .05;
     public static final int YETI_LIMIT = 2;
     public static final int YETI_NUM_PROPERTIES = 3;

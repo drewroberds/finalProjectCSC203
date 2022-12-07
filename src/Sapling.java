@@ -5,7 +5,7 @@ import java.util.List;
 public class Sapling extends Plant {
     public static final int SAPLING_HEALTH = 0;
     public static final int SAPLING_NUM_PROPERTIES = 1;
-    private static final double SAPLING_ACTION_ANIMATION_PERIOD = 1.000; // have to be in sync since grows and gains health at same time
+    private static final double SAPLING_ACTION_ANIMATION_PERIOD = 1.500; // have to be in sync since grows and gains health at same time
     private static final int SAPLING_HEALTH_LIMIT = 5;
     public static final String SAPLING_KEY = "sapling";
 
