@@ -67,8 +67,20 @@ public final class VirtualWorld extends PApplet {
     // Just for debugging and for P5
     // Be sure to refactor this method as appropriate
     public void mousePressed() {
+
         Point pressed = mouseToPoint();
         System.out.println("CLICK! " + pressed.x + ", " + pressed.y);
+        //basically ripped from cardinal neighbors
+        List<Point> surroundingTiles = new ArrayList<>();
+        surroundingTiles.add(new Point(pressed.x, pressed.y));
+        surroundingTiles.add(new Point(pressed.x, pressed.y - 1));
+        surroundingTiles.add(new Point(pressed.x, pressed.y + 1));
+        surroundingTiles.add(new Point(pressed.x - 1, pressed.y));
+        surroundingTiles.add(new Point(pressed.x + 1, pressed.y));
+        surroundingTiles.add(new Point(pressed.x + 1, pressed.y+1));
+        surroundingTiles.add(new Point(pressed.x + 1, pressed.y-1));
+        surroundingTiles.add(new Point(pressed.x - 1, pressed.y+1));
+        surroundingTiles.add(new Point(pressed.x - 1, pressed.y-1));
 
         Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent()) {
@@ -79,6 +91,19 @@ public final class VirtualWorld extends PApplet {
             YetiNotFull yeti = new YetiNotFull("yeti", pressed, imageStore.getImageList(YetiNotFull.YETI_KEY), 1, 0, 1, 1, 0, 0);
             world.addEntity(yeti);
             yeti.scheduleActions(scheduler, world, imageStore);
+            for (Point current: surroundingTiles) {
+                Optional<PImage> currentImage = world.getBackgroundImage(current);
+                if (currentImage.equals(world.getBackgroundImage(new Point(0, 0)))) {
+                    if (world.withinBounds(current)) {
+                        world.setBackgroundCell(current, new Background("ice", imageStore.getImageList("ice")));
+                    }
+                }
+                if (currentImage.equals(world.getBackgroundImage(new Point(2, 3)))) {
+                    if (world.withinBounds(current)) {
+                        world.setBackgroundCell(current, new Background("ice", imageStore.getImageList("ice")));
+                    }
+                }
+            }
         }
     }
 

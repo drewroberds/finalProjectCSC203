@@ -45,8 +45,8 @@ public class RONNIE extends MovableEntity {
         return new RONNIE(id, position, images, 0, 0, actionPeriod, animationPeriod, 0, 0);
     }
     public Point nextPositionRONNIE(WorldModel world, Point destPos) {
-        PathingStrategy SSP = new SingleStepPathingStrategy();
-        List<Point> possibleNeighbors = SSP.computePath(this.getPosition(), destPos, (p) -> !world.isOccupied(p), Point::adjacent, PathingStrategy.CARDINAL_NEIGHBORS);
+        AStarPathingStrategy pathing = new AStarPathingStrategy();
+        List<Point> possibleNeighbors = pathing.computePath(this.getPosition(), destPos, (p) -> !world.isOccupied(p), Point::adjacent, PathingStrategy.CARDINAL_NEIGHBORS);
 
         if(possibleNeighbors.size() == 0){
             return this.getPosition();

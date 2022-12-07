@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 
 
-class AStarPathingStrategy implements PathingStrategy{
+class AStarPathingStrategy implements PathingStrategy {
     public class WorldNode {
         private int estimatedDistToEnd;   // h value
         private int distFromStart;         // g value
@@ -15,7 +15,7 @@ class AStarPathingStrategy implements PathingStrategy{
         private WorldNode previous;
         private int totalDist;             // f value
 
-        WorldNode(int estimatedDistToEnd, int distFromStart, Point position, WorldNode previous){
+        WorldNode(int estimatedDistToEnd, int distFromStart, Point position, WorldNode previous) {
             this.estimatedDistToEnd = estimatedDistToEnd;
             this.distFromStart = distFromStart;
             this.position = position;
@@ -26,13 +26,24 @@ class AStarPathingStrategy implements PathingStrategy{
         public int getEstimatedDistToEnd() {
             return estimatedDistToEnd;
         }
-        public int getDistFromStart() { return distFromStart; }
-        public int getTotalDist() { return totalDist; }
-        public Point getPosition() { return position; }
-        public void setPosition(int y, int x){
+
+        public int getDistFromStart() {
+            return distFromStart;
+        }
+
+        public int getTotalDist() {
+            return totalDist;
+        }
+
+        public Point getPosition() {
+            return position;
+        }
+
+        public void setPosition(int y, int x) {
             position.y = y;
             position.x = x;
         }
+
         public WorldNode getPrevious() {
             return previous;
         }
@@ -46,39 +57,33 @@ class AStarPathingStrategy implements PathingStrategy{
 
         PriorityQueue<WorldNode> openList = new PriorityQueue<>(new WorldNodeComparator());
         HashSet<Point> closedList = new HashSet<>();
-        HashSet<WorldNode> checklistSet = new HashSet<>();
-        ArrayList<Point> finalPath = new ArrayList<>();
+        List<Point> finalPath = new LinkedList<>();
         WorldNode startNode = new WorldNode(start.manhattanDistance(end), 0, start, null);
-
-
         openList.add(startNode);
-        checklistSet.add(startNode);
-        while(!openList.isEmpty()){                                // while openList has entries
-            WorldNode currentNode = openList.remove();
-            if(withinReach.test(currentNode.getPosition(), end)){
+        WorldNode currentNode = startNode;
+        while (!openList.isEmpty()) {                                // while openList has entries
+            currentNode = openList.poll();
+            if (withinReach.test(currentNode.getPosition(), end)) {
+                List<Point> path = new LinkedList<>();
+                while(currentNode.getPrevious() != null){
+                    path.add(0,currentNode.getPosition());
+                    currentNode = currentNode.getPrevious();
+                    finalPath = path;
+                }
                 break;
             }
-            if(closedList.contains(currentNode.getPosition())){    // check if cur is already on closedList
-                continue;                                           // if it is, ignore it
-            }
             closedList.add(currentNode.getPosition());              // add the current node's Point to the closed list, so we mark it as checked
-            WorldNode temp = currentNode;
-            List<WorldNode> neighbors = potentialNeighbors.apply(temp.getPosition())    // gets potentialNeighbors of currentNode
+            //WorldNode temp = currentNode;
+            List<Point> neighbors = potentialNeighbors.apply(currentNode.getPosition())    // gets potentialNeighbors of currentNode
+                    .filter(p -> !(start.equals(p)&&end.equals(p)))
                     .filter(canPassThrough)                        // filters potential neighbors that "canPassThrough"
                     .filter((p) -> !closedList.contains(p))        // filters the points that are NOT on the closed list
-                    .map((p) ->                                    // maps the points to new WorldNodes
-                        new WorldNode(p.manhattanDistance(end), temp.getDistFromStart()+1, p, temp))
                     .collect(Collectors.toList());
 
-            for(WorldNode wn : neighbors){
-                openList.add(wn);
+            for (Point wn : neighbors) {
+                openList.add(new WorldNode(wn.manhattanDistance(end), currentNode.distFromStart + 1, wn, currentNode));
+                closedList.add(wn);
             }
-            while(currentNode.getPrevious() != null){
-                finalPath.add(currentNode.getPosition());
-                currentNode = currentNode.getPrevious();
-            }
-            finalPath.add(currentNode.getPosition());
-            Collections.reverse(finalPath);
         }
         return finalPath;
     }
