@@ -17,7 +17,7 @@ public class RONNIE extends MovableEntity {
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
         Optional<Entity> ronnieTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(Stump.class)));
 
-        if (ronnieTarget.isPresent()) {
+        if (ronnieTarget.equals(Stump.class) && ronnieTarget.isPresent()) {
             Point tgtPos = ronnieTarget.get().getPosition();
 
             if (moveTo(world, ronnieTarget.get(), scheduler)) {
@@ -28,6 +28,17 @@ public class RONNIE extends MovableEntity {
                 sapling.scheduleActions(scheduler, world, imageStore);
             }
         }
+/*        else if (ronnieTarget.equals(YETI_SLEEPYTIME.class) && ronnieTarget.isPresent()){
+            Point tgtPos = ronnieTarget.get().getPosition();
+
+            if (moveTo(world, ronnieTarget.get(), scheduler)) {
+
+                YetiNotFull yeti = new YetiNotFull("yeti" + this.getId(), tgtPos, imageStore.getImageList(YetiNotFull.YETI_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
+
+                world.addEntity(yeti);
+                yeti.scheduleActions(scheduler, world, imageStore);
+            }
+        }*/
 
         scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
     }

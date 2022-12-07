@@ -15,17 +15,16 @@ public class DUDEAFFLICTED extends MovableEntity {
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> dudeAfflictedTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(Stump.class)));
+        Optional<Entity> dudeAfflictedTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(YetiDudeNotFull.class, YetiDudeFull.class)));
 
         if (dudeAfflictedTarget.isPresent()) {
             Point tgtPos = dudeAfflictedTarget.get().getPosition();
 
             if (moveTo(world, dudeAfflictedTarget.get(), scheduler)) {
 
-                Sapling sapling = new Sapling("sapling_" + this.getId(), tgtPos, imageStore.getImageList(Sapling.SAPLING_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
+                YETI_SLEEPYTIME sleepyYeti = new YETI_SLEEPYTIME("yetisleep" + this.getId(), tgtPos, imageStore.getImageList(YETI_SLEEPYTIME.YETI_SLEEPYTIME_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
 
-                world.addEntity(sapling);
-                sapling.scheduleActions(scheduler, world, imageStore);
+                world.addEntity(sleepyYeti);
             }
         }
 
