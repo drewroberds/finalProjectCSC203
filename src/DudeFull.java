@@ -12,12 +12,20 @@ public class DudeFull extends Dude{
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> fullTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(House.class)));
+        if(this.getHealth() > 0) {
 
-        if (fullTarget.isPresent() && this.moveTo(world, fullTarget.get(), scheduler)) {
-            this.transformFull(world, scheduler, imageStore);
-        } else {
-            scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
+            Optional<Entity> fullTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(House.class)));
+
+            if (fullTarget.isPresent() && this.moveTo(world, fullTarget.get(), scheduler)) {
+                this.transformFull(world, scheduler, imageStore);
+            } else {
+                scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
+            }
+        }
+
+        else{
+            world.removeEntity(scheduler, this);
+            scheduler.unscheduleAllEvents(this);
         }
     }
 
