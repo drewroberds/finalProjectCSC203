@@ -15,7 +15,7 @@ public class DUDEAFFLICTED extends MovableEntity {
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> dudeAfflictedTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(Stump.class)));
+        Optional<Entity> dudeAfflictedTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(YetiDudeNotFull.class, YetiDudeFull.class)));
 
         if (dudeAfflictedTarget.isPresent()) {
             Point tgtPos = dudeAfflictedTarget.get().getPosition();

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public class YetiDudeFull extends Yeti {
 
+
     public YetiDudeFull(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod, health, healthLimit);
     }

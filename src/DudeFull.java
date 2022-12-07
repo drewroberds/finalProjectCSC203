@@ -29,9 +29,6 @@ public class DudeFull extends Dude{
         }
     }
 
-//    public static DudeFull createDudeFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
-//        return new DudeFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod, 0, 0);
-//    }
     public void transformFull(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         DudeNotFull dude = new DudeNotFull(Dude.DUDE_KEY, this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
 
