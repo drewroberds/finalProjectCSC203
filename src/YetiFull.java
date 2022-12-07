@@ -21,12 +21,8 @@ public class YetiFull extends Yeti {
             scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
         }
     }
-
-    //    public static DudeFull createDudeFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
-//        return new DudeFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod, 0, 0);
-//    }
     public void transformYetiFull(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        YetiDudeNotFull yeti = new YetiDudeNotFull(Yeti.YETI_DUDE_KEY, this.getPosition(), this.getImages(), 0, 2, this.getActionPeriod(), this.getAnimationPeriod(), 0, this.getHealthLimit());
+        YetiDudeNotFull yeti = new YetiDudeNotFull(Yeti.YETI_DUDE_KEY, this.getPosition(), imageStore.getImageList(YetiDudeNotFull.YETI_DUDE_KEY), 0, 2, this.getActionPeriod(), this.getAnimationPeriod(), 0, this.getHealthLimit());
 
         world.removeEntity(scheduler, this);
 

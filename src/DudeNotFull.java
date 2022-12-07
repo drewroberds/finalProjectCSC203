@@ -20,7 +20,7 @@ public class DudeNotFull extends Dude{
     }
 
     public static DudeNotFull createDudeNotFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
-        return new DudeNotFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod, 0, 0);
+        return new DudeNotFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod, 1, 1);
     }
     public boolean transformNotFull( WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.getResourceCount() >= this.getResourceLimit()) {
