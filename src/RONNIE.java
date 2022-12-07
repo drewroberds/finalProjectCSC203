@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Fairy extends MovableEntity {
-    public static final int FAIRY_ANIMATION_PERIOD = 0;
-    public static final int FAIRY_ACTION_PERIOD = 1;
-    public static final int FAIRY_NUM_PROPERTIES = 2;
-    public static final String FAIRY_KEY = "fairy";
-    public Fairy(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
+public class RONNIE extends MovableEntity {
+    public static final int RONNIE_ANIMATION_PERIOD = 0;
+    public static final int RONNIE_ACTION_PERIOD = 1;
+    public static final int RONNIE_NUM_PROPERTIES = 2;
+    public static final String RONNIE_KEY = "ronnie";
+    public RONNIE(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod, health, healthLimit);
     }
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> fairyTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(Stump.class)));
+        Optional<Entity> ronnieTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(Stump.class)));
 
-        if (fairyTarget.isPresent()) {
-            Point tgtPos = fairyTarget.get().getPosition();
+        if (ronnieTarget.isPresent()) {
+            Point tgtPos = ronnieTarget.get().getPosition();
 
-            if (moveTo(world, fairyTarget.get(), scheduler)) {
+            if (moveTo(world, ronnieTarget.get(), scheduler)) {
 
                 Sapling sapling = new Sapling("sapling_" + this.getId(), tgtPos, imageStore.getImageList(Sapling.SAPLING_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
 
@@ -33,18 +33,18 @@ public class Fairy extends MovableEntity {
     }
 
 
-    public static void parseFairy(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
-        if (properties.length == FAIRY_NUM_PROPERTIES) {
-            Fairy entity = Fairy.createFairy(id, pt, Double.parseDouble(properties[FAIRY_ACTION_PERIOD]), Double.parseDouble(properties[FAIRY_ANIMATION_PERIOD]), imageStore.getImageList(FAIRY_KEY));
+    public static void parseRONNIE(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
+        if (properties.length == RONNIE_NUM_PROPERTIES) {
+            RONNIE entity = RONNIE.createRONNIE(id, pt, Double.parseDouble(properties[RONNIE_ACTION_PERIOD]), Double.parseDouble(properties[RONNIE_ANIMATION_PERIOD]), imageStore.getImageList(RONNIE_KEY));
             world.tryAddEntity(entity);
         }else{
-            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", FAIRY_KEY, FAIRY_NUM_PROPERTIES));
+            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", RONNIE_KEY, RONNIE_NUM_PROPERTIES));
         }
     }
-    public static Fairy createFairy(String id, Point position, double actionPeriod, double animationPeriod, List<PImage> images) {
-        return new Fairy(id, position, images, 0, 0, actionPeriod, animationPeriod, 0, 0);
+    public static RONNIE createRONNIE(String id, Point position, double actionPeriod, double animationPeriod, List<PImage> images) {
+        return new RONNIE(id, position, images, 0, 0, actionPeriod, animationPeriod, 0, 0);
     }
-    public Point nextPositionFairy(WorldModel world, Point destPos) {
+    public Point nextPositionRONNIE(WorldModel world, Point destPos) {
         PathingStrategy SSP = new SingleStepPathingStrategy();
         List<Point> possibleNeighbors = SSP.computePath(this.getPosition(), destPos, (p) -> !world.isOccupied(p), Point::adjacent, PathingStrategy.CARDINAL_NEIGHBORS);
 
@@ -77,7 +77,7 @@ public class Fairy extends MovableEntity {
             world.removeEntity(scheduler, target);
             return true;
         } else {
-            Point nextPos = nextPositionFairy(world, target.getPosition());
+            Point nextPos = nextPositionRONNIE(world, target.getPosition());
 
             if (!this.getPosition().equals(nextPos)) {
                 world.moveEntity(scheduler, this, nextPos);

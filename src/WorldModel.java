@@ -125,7 +125,7 @@ public final class WorldModel {
             switch (key) {
                 case Obstacle.OBSTACLE_KEY -> Obstacle.parseObstacle(this, properties, pt, id, imageStore);
                 case Dude.DUDE_KEY -> Dude.parseDude(this, properties, pt, id, imageStore);
-                case Fairy.FAIRY_KEY -> Fairy.parseFairy(this, properties, pt, id, imageStore);
+                case RONNIE.RONNIE_KEY -> RONNIE.parseRONNIE(this, properties, pt, id, imageStore);
                 case House.HOUSE_KEY -> House.parseHouse(this, properties, pt, id, imageStore);
                 case Tree.TREE_KEY -> Tree.parseTree(this, properties, pt, id, imageStore);
                 case Sapling.SAPLING_KEY -> Sapling.parseSapling(this, properties, pt, id, imageStore);
