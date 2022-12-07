@@ -32,7 +32,7 @@ public class Sapling extends Plant {
         }
     }
 
-    public static void parseSapling(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
+/*    public static void parseSapling(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == Sapling.SAPLING_NUM_PROPERTIES) {
             int health = Integer.parseInt(properties[Sapling.SAPLING_HEALTH]);
             Sapling entity = Sapling.createSapling(id, pt, imageStore.getImageList(SAPLING_KEY), health);
@@ -40,7 +40,7 @@ public class Sapling extends Plant {
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", SAPLING_KEY, Sapling.SAPLING_NUM_PROPERTIES));
         }
-    }
+    }*/
     @Override
     public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore) {
         scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
