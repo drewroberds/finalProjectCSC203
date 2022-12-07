@@ -75,7 +75,11 @@ public final class VirtualWorld extends PApplet {
             Entity entity = entityOptional.get();
             System.out.println(entity.getId() + ": " + entity.getClass() + " : " + entity.getHealth());
         }
-
+        if(!world.isOccupied(pressed)) {
+            YettiNotFull yetti = new YettiNotFull("yetti", pressed, imageStore.getImageList(YettiNotFull.YETTI_KEY), 1, 0, 1, 1, 0, 0);
+            world.addEntity(yetti);
+            yetti.scheduleActions(scheduler, world, imageStore);
+        }
     }
 
     public void scheduleActions(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
