@@ -6,17 +6,17 @@ import java.util.Optional;
 
 public class YettiFull extends Yetti{
 
-    public static final String YETTI_KEY = "yetti";
+    public static final String YETTI_DUDE_KEY = "yettiDude";
     public YettiFull(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod, health, healthLimit);
     }
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> fullTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(House.class)));
+        Optional<Entity> fullTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(YETI_CAVE.class)));
 
         if (fullTarget.isPresent() && this.moveTo(world, fullTarget.get(), scheduler)) {
-            this.transformFull(world, scheduler, imageStore);
+            this.transformYettiFull(world, scheduler, imageStore);
         } else {
             scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
         }
@@ -25,13 +25,13 @@ public class YettiFull extends Yetti{
     //    public static DudeFull createDudeFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
 //        return new DudeFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod, 0, 0);
 //    }
-    public void transformFull(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        DudeNotFull dude = new DudeNotFull(Dude.DUDE_KEY, this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
+    public void transformYettiFull(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
+        YettiDudeNotFull yetti = new YettiDudeNotFull(Yetti.YETTI_DUDE_KEY, this.getPosition(), this.getImages(), 0, 2, this.getActionPeriod(), this.getAnimationPeriod(), 0, this.getHealthLimit());
 
         world.removeEntity(scheduler, this);
 
-        world.addEntity(dude);
-        dude.scheduleActions(scheduler, world, imageStore);
+        world.addEntity(yetti);
+        yetti.scheduleActions(scheduler, world, imageStore);
     }
     @Override
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
