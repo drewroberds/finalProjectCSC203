@@ -12,7 +12,7 @@ public class Obstacle extends AnimatedEntity{
 
     @Override
     public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore) {
-
+        scheduler.scheduleEvent(this, new AnimationAction(this, null, null, 0), this.getAnimationPeriod());
     }
     public static void parseObstacle(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == Obstacle.OBSTACLE_NUM_PROPERTIES) {

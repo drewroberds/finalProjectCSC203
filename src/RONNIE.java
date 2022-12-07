@@ -3,9 +3,11 @@ import processing.core.PImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 public class RONNIE extends MovableEntity {
-    public static final int RONNIE_ANIMATION_PERIOD = 0;
+    public static final int RONNIE_ANIMATION_PERIOD = 1;
     public static final int RONNIE_ACTION_PERIOD = 1;
     public static final int RONNIE_NUM_PROPERTIES = 2;
     public static final String RONNIE_KEY = "ronnie";
@@ -17,7 +19,7 @@ public class RONNIE extends MovableEntity {
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
         Optional<Entity> ronnieTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(Stump.class)));
 
-        if (ronnieTarget.equals(Stump.class) && ronnieTarget.isPresent()) {
+        if (ronnieTarget.isPresent()) {
             Point tgtPos = ronnieTarget.get().getPosition();
 
             if (moveTo(world, ronnieTarget.get(), scheduler)) {
@@ -57,7 +59,9 @@ public class RONNIE extends MovableEntity {
     }
     public Point nextPositionRONNIE(WorldModel world, Point destPos) {
         AStarPathingStrategy pathing = new AStarPathingStrategy();
-        List<Point> possibleNeighbors = pathing.computePath(this.getPosition(), destPos, (p) -> !world.isOccupied(p), Point::adjacent, PathingStrategy.CARDINAL_NEIGHBORS);
+        Predicate<Point> predicate = s -> !world.isOccupied(s) && world.withinBounds(s);
+        BiPredicate<Point, Point> bipredicate = (p1, p2) -> p1.adjacent(p2);
+        List<Point> possibleNeighbors = pathing.computePath(this.getPosition(), destPos, predicate, bipredicate, PathingStrategy.CARDINAL_NEIGHBORS);
 
         if(possibleNeighbors.size() == 0){
             return this.getPosition();

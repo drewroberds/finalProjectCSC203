@@ -19,9 +19,9 @@ public class YetiNotFull extends Yeti {
         }
     }
 
-    public static YetiNotFull createYetiNotFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
+/*    public static YetiNotFull createYetiNotFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
         return new YetiNotFull(id, position, images, resourceLimit-2, 0, actionPeriod, animationPeriod, 0, 0);
-    }
+    }*/
     public boolean transformNotFull( WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.getResourceCount() >= this.getResourceLimit()) {
             YetiFull yeti = new YetiFull(this.getId(), this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());

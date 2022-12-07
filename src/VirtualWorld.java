@@ -7,8 +7,8 @@ import processing.core.*;
 public final class VirtualWorld extends PApplet {
     private static String[] ARGS;
 
-    public static final int VIEW_WIDTH = 640;
-    public static final int VIEW_HEIGHT = 480;
+    public static final int VIEW_WIDTH = 800;
+    public static final int VIEW_HEIGHT = 800;
     public static final int TILE_WIDTH = 32;
     public static final int TILE_HEIGHT = 32;
 

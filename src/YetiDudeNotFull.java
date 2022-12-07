@@ -16,6 +16,10 @@ public class YetiDudeNotFull extends Yeti {
         if (target.isEmpty() || !moveTo(world, target.get(), scheduler) || !transformNotFull(world, scheduler, imageStore)) {
             scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
         }
+        else{
+            world.removeEntity(scheduler, this);
+            scheduler.unscheduleAllEvents(this);
+        }
     }
 
     public static YetiDudeNotFull createYetiDudeNotFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {

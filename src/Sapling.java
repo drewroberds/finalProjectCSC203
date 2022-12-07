@@ -37,7 +37,7 @@ public class Sapling extends Plant {
     }
 
     public static Sapling createSapling(String id, Point position, List<PImage> images, int health) {
-        return new Sapling(id, position, images, 0, 0, SAPLING_ACTION_ANIMATION_PERIOD, SAPLING_ACTION_ANIMATION_PERIOD, 0, SAPLING_HEALTH_LIMIT);
+        return new Sapling(id, position, images, 0, 0, SAPLING_ACTION_ANIMATION_PERIOD, SAPLING_ACTION_ANIMATION_PERIOD, SAPLING_HEALTH, SAPLING_HEALTH_LIMIT);
     }
     @Override
     public boolean transformPlant(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {

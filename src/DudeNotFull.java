@@ -19,7 +19,6 @@ public class DudeNotFull extends Dude{
                 scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
             }
         }
-
         else{
             world.removeEntity(scheduler, this);
             scheduler.unscheduleAllEvents(this);
