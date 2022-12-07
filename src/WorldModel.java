@@ -130,6 +130,7 @@ public final class WorldModel {
                 case Tree.TREE_KEY -> Tree.parseTree(this, properties, pt, id, imageStore);
                 case Sapling.SAPLING_KEY -> Sapling.parseSapling(this, properties, pt, id, imageStore);
                 case Stump.STUMP_KEY -> Stump.parseStump(this, properties, pt, id, imageStore);
+                case YETI_CAVE.CAVE_KEY -> YETI_CAVE.parseYETI_CAVE(this, properties, pt, id, imageStore);
                 default -> throw new IllegalArgumentException("Entity key is unknown");
             }
         }else{
