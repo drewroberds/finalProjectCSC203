@@ -12,18 +12,23 @@ public class DudeFull extends Dude{
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> fullTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(House.class)));
+        if(this.getHealth() > 0) {
 
-        if (fullTarget.isPresent() && this.moveTo(world, fullTarget.get(), scheduler)) {
-            this.transformFull(world, scheduler, imageStore);
-        } else {
-            scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
+            Optional<Entity> fullTarget = world.findNearest(this.getPosition(), new ArrayList<>(List.of(House.class)));
+
+            if (fullTarget.isPresent() && this.moveTo(world, fullTarget.get(), scheduler)) {
+                this.transformFull(world, scheduler, imageStore);
+            } else {
+                scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
+            }
+        }
+
+        else{
+            world.removeEntity(scheduler, this);
+            scheduler.unscheduleAllEvents(this);
         }
     }
 
-//    public static DudeFull createDudeFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
-//        return new DudeFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod, 0, 0);
-//    }
     public void transformFull(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         DudeNotFull dude = new DudeNotFull(Dude.DUDE_KEY, this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
 

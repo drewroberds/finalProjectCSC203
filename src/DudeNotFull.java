@@ -12,10 +12,17 @@ public class DudeNotFull extends Dude{
 
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> target = world.findNearest(this.getPosition(), Arrays.asList(Tree.class, Sapling.class));
+        if(this.getHealth() > 0) {
+            Optional<Entity> target = world.findNearest(this.getPosition(), Arrays.asList(Tree.class, Sapling.class));
 
-        if (target.isEmpty() || !moveTo(world, target.get(), scheduler) || !transformNotFull(world, scheduler, imageStore)) {
-            scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
+            if (target.isEmpty() || !moveTo(world, target.get(), scheduler) || !transformNotFull(world, scheduler, imageStore)) {
+                scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
+            }
+        }
+
+        else{
+            world.removeEntity(scheduler, this);
+            scheduler.unscheduleAllEvents(this);
         }
     }
 
