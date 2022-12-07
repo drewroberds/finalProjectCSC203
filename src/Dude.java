@@ -26,7 +26,7 @@ public abstract class Dude extends MovableEntity {
     public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore) {
     }
     public Point nextPositionDude(WorldModel world, Point destPos) {
-        SingleStepPathingStrategy pathing = new SingleStepPathingStrategy();
+        AStarPathingStrategy pathing = new AStarPathingStrategy();
         List<Point> possibleNeighbors = pathing.computePath(this.getPosition(), destPos, (p) -> !world.isOccupied(p) || world.getOccupancyCell(p).getClass() == Stump.class, Point::adjacent, PathingStrategy.CARDINAL_NEIGHBORS);
 
         if(possibleNeighbors.size() == 0){
