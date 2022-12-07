@@ -49,9 +49,10 @@ public class Tree extends Plant {
     @Override
     public boolean transformPlant(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.health <= 0) {
-            Entity stump = Stump.createStump(Stump.STUMP_KEY + "_" + this.getId(), getPosition(), imageStore.getImageList(Stump.STUMP_KEY));
+            Stump stump = new Stump(Stump.STUMP_KEY + "_" + this.getId(), this.getPosition(), imageStore.getImageList(Stump.STUMP_KEY), 0 , 0, 0, 0, 0, 0);
 
             world.removeEntity(scheduler, this);
+            scheduler.unscheduleAllEvents(this);
 
             world.addEntity(stump);
 

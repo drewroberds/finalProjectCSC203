@@ -24,7 +24,7 @@ public class RONNIE extends MovableEntity {
 
             if (moveTo(world, ronnieTarget.get(), scheduler)) {
 
-                Sapling sapling = new Sapling("sapling_" + this.getId(), tgtPos, imageStore.getImageList(Sapling.SAPLING_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
+                Sapling sapling = new Sapling("sapling_" + this.getId(), tgtPos, imageStore.getImageList(Sapling.SAPLING_KEY), 0, 0, Sapling.getSaplingActionPeriod(), Sapling.getSaplingActionPeriod(), 0, Sapling.getSaplingHealthLimit());
 
                 world.addEntity(sapling);
                 sapling.scheduleActions(scheduler, world, imageStore);
@@ -90,6 +90,7 @@ public class RONNIE extends MovableEntity {
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
         if (this.getPosition().adjacent(target.getPosition())) {
             world.removeEntity(scheduler, target);
+            scheduler.unscheduleAllEvents(target);
             return true;
         } else {
             Point nextPos = nextPositionRONNIE(world, target.getPosition());

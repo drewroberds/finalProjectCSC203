@@ -13,6 +13,17 @@ public class Sapling extends Plant {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod, health, healthLimit);
     }
 
+    public static double getSaplingActionPeriod() {
+        return SAPLING_ACTION_ANIMATION_PERIOD;
+    }
+    public static int getSaplingHealthLimit(){
+        return SAPLING_HEALTH_LIMIT;
+    }
+    public static int getSaplingHealth(){
+        return SAPLING_HEALTH;
+    }
+
+
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
         this.health++;
@@ -50,12 +61,12 @@ public class Sapling extends Plant {
 
             return true;
         } else if (this.health >= this.healthLimit) {
-            Entity tree = Tree.createTree(Tree.TREE_KEY + "_" + this.getId(), getPosition(), getNumFromRange(Tree.TREE_ACTION_MAX, Tree.TREE_ACTION_MIN), getNumFromRange(Tree.TREE_ANIMATION_MAX, Tree.TREE_ANIMATION_MIN), getIntFromRange(Tree.TREE_HEALTH_MAX, Tree.TREE_HEALTH_MIN), imageStore.getImageList(Tree.TREE_KEY));
+            Tree tree = Tree.createTree(Tree.TREE_KEY + "_" + this.getId(), getPosition(), getNumFromRange(Tree.TREE_ACTION_MAX, Tree.TREE_ACTION_MIN), getNumFromRange(Tree.TREE_ANIMATION_MAX, Tree.TREE_ANIMATION_MIN), getIntFromRange(Tree.TREE_HEALTH_MAX, Tree.TREE_HEALTH_MIN), imageStore.getImageList(Tree.TREE_KEY));
 
             world.removeEntity(scheduler, this);
 
             world.addEntity(tree);
-            scheduleActions(scheduler, world, imageStore);
+            tree.scheduleActions(scheduler, world, imageStore);
 
             return true;
         }
