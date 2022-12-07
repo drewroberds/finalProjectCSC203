@@ -33,17 +33,17 @@ public class DUDEAFFLICTED extends MovableEntity {
     }
 
 
-    public static void parseDUDEAFFLICTED(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
+/*    public static void parseDUDEAFFLICTED(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == DUDEAFFLICTED_NUM_PROPERTIES) {
             DUDEAFFLICTED entity = DUDEAFFLICTED.createDUDEAFFLICTED(id, pt, Double.parseDouble(properties[DUDEAFFLICTED_ACTION_PERIOD]), Double.parseDouble(properties[DUDEAFFLICTED_ANIMATION_PERIOD]), imageStore.getImageList(DUDEAFFLICTED_KEY));
             world.tryAddEntity(entity);
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", DUDEAFFLICTED_KEY, DUDEAFFLICTED_NUM_PROPERTIES));
         }
-    }
-    public static DUDEAFFLICTED createDUDEAFFLICTED(String id, Point position, double actionPeriod, double animationPeriod, List<PImage> images) {
+    }*/
+/*    public static DUDEAFFLICTED createDUDEAFFLICTED(String id, Point position, double actionPeriod, double animationPeriod, List<PImage> images) {
         return new DUDEAFFLICTED(id, position, images, 0, 0, actionPeriod, animationPeriod, 0, 0);
-    }
+    }*/
     public Point nextPositionDUDEAFFLICTED(WorldModel world, Point destPos) {
         AStarPathingStrategy pathing = new AStarPathingStrategy();
         List<Point> possibleNeighbors = pathing.computePath(this.getPosition(), destPos, (p) -> !world.isOccupied(p), Point::adjacent, PathingStrategy.CARDINAL_NEIGHBORS);
