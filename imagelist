@@ -42,4 +42,5 @@ yetti images/yetti0.png
 yetti images/yetti1.png
 yetti images/yetti2.png
 yetti images/yetti3.png
-cave images/freeze4.bmp 255 255 255 0
+cave images/cave0.png 255 255 255 0
+ice images/ice.png
