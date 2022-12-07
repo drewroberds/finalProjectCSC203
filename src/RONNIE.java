@@ -7,8 +7,8 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class RONNIE extends MovableEntity {
-    public static final int RONNIE_ANIMATION_PERIOD = 1;
-    public static final int RONNIE_ACTION_PERIOD = 1;
+    public static final double RONNIE_ANIMATION_PERIOD = .15;
+    public static final double RONNIE_ACTION_PERIOD = .5;
     public static final int RONNIE_NUM_PROPERTIES = 2;
     public static final String RONNIE_KEY = "ronnie";
     public RONNIE(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
@@ -48,7 +48,7 @@ public class RONNIE extends MovableEntity {
 
     public static void parseRONNIE(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == RONNIE_NUM_PROPERTIES) {
-            RONNIE entity = RONNIE.createRONNIE(id, pt, Double.parseDouble(properties[RONNIE_ACTION_PERIOD]), Double.parseDouble(properties[RONNIE_ANIMATION_PERIOD]), imageStore.getImageList(RONNIE_KEY));
+            RONNIE entity = RONNIE.createRONNIE(id, pt, RONNIE_ACTION_PERIOD, RONNIE_ANIMATION_PERIOD, imageStore.getImageList(RONNIE_KEY));
             world.tryAddEntity(entity);
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", RONNIE_KEY, RONNIE_NUM_PROPERTIES));

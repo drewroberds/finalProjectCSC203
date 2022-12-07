@@ -22,7 +22,7 @@ public class YetiDudeFull extends Yeti {
         }
     }
     public void transformFull(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        YetiDudeNotFull yeti = new YetiDudeNotFull(Yeti.YETI_KEY, this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
+        YetiDudeNotFull yeti = new YetiDudeNotFull(Yeti.YETI_KEY, this.getPosition(), this.getImages(), 3, this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
 
         world.removeEntity(scheduler, this);
 

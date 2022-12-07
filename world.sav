@@ -57,11 +57,11 @@ Entities:
     tree  35 27 0.256 1.168 2
     tree  35 25 0.144 1.266 2
 obstacle  13 07 1.126
-   ronnie  00 00 0.05 0.15
+   ronnie  00 00 0.75 0.15
     tree  00 02 0.501 1.289 2
 obstacle  17 09 1.105
     tree  30 06 0.050 1.006 2
-   ronnie  28 04 0.05 0.15
+   ronnie  28 04 0.75 0.15
 obstacle  09 07 1.159
     tree  05 00 0.451 1.315 2
 obstacle  17 10 1.047
@@ -106,7 +106,7 @@ obstacle  14 08 1.097
     tree  03 24 0.162 1.314 1
     tree  01 02 0.553 1.206 1
 obstacle  24 18 1.038
-  ronnie  39 29 0.05 0.075
+  ronnie  39 29 0.75 0.075
 obstacle  21 14 1.040
 obstacle  21 16 1.053
     tree  06 03 0.516 1.068 2

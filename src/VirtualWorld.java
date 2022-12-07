@@ -89,6 +89,7 @@ public final class VirtualWorld extends PApplet {
         }
         if(!world.isOccupied(pressed)) {
             YetiNotFull yeti = new YetiNotFull("yeti", pressed, imageStore.getImageList(YetiNotFull.YETI_KEY), 1, 0, .5, .01, 0, 0);
+
             world.addEntity(yeti);
             yeti.scheduleActions(scheduler, world, imageStore);
             for (Point current: surroundingTiles) {

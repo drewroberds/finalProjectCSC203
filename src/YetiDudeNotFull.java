@@ -27,7 +27,7 @@ public class YetiDudeNotFull extends Yeti {
     }*/
     public boolean transformNotFull( WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.getResourceCount() >= this.getResourceLimit()) {
-            YetiDudeFull yeti = new YetiDudeFull(this.getId(), this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
+            YetiDudeFull yeti = new YetiDudeFull(this.getId(), this.getPosition(), this.getImages(), 3, 3, Yeti.YETI_ACTION_PERIOD, Yeti.YETI_ANIMATION_PERIOD, this.getHealth(), this.getHealthLimit());
 
             world.removeEntity(scheduler, this);
             scheduler.unscheduleAllEvents(this);
