@@ -4,33 +4,32 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class YettiNotFull extends Yetti{
-    public static final String YETTI_KEY = "yetti";
-    public YettiNotFull(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
+public class YetiDudeNotFull extends Yeti {
+    public YetiDudeNotFull(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod, health, healthLimit);
     }
-
+    public static final String YETI_DUDE_KEY = "yetiDude";
     @Override
     public void executeActivity(EventScheduler scheduler, ImageStore imageStore, WorldModel world) {
-        Optional<Entity> target = world.findNearest(this.getPosition(), Arrays.asList(DudeFull.class, DudeNotFull.class));
+        Optional<Entity> target = world.findNearest(this.getPosition(), Arrays.asList(Tree.class, Sapling.class));
 
         if (target.isEmpty() || !moveTo(world, target.get(), scheduler) || !transformNotFull(world, scheduler, imageStore)) {
             scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
         }
     }
 
-    public static YettiNotFull createYettiNotFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
-        return new YettiNotFull(id, position, images, resourceLimit-2, 0, actionPeriod, animationPeriod, 0, 0);
+    public static YetiDudeNotFull createYetiDudeNotFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
+        return new YetiDudeNotFull("yetiDude", position, images, resourceLimit, 0, actionPeriod, animationPeriod, 0, 0);
     }
     public boolean transformNotFull( WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.getResourceCount() >= this.getResourceLimit()) {
-            YettiFull yetti = new YettiFull(this.getId(), this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
+            YetiDudeFull yeti = new YetiDudeFull(this.getId(), this.getPosition(), this.getImages(), this.getResourceLimit(), this.getResourceCount(), this.getActionPeriod(), this.getAnimationPeriod(), this.getHealth(), this.getHealthLimit());
 
             world.removeEntity(scheduler, this);
             scheduler.unscheduleAllEvents(this);
 
-            world.addEntity(yetti);
-            yetti.scheduleActions(scheduler, world, imageStore);
+            world.addEntity(yeti);
+            yeti.scheduleActions(scheduler, world, imageStore);
 
             return true;
         }
@@ -44,7 +43,7 @@ public class YettiNotFull extends Yetti{
             target.health--;
             return true;
         } else {
-            Point nextPos = nextPositionYetti(world, target.getPosition());
+            Point nextPos = nextPositionYeti(world, target.getPosition());
 
             if (!this.getPosition().equals(nextPos)) {
                 world.moveEntity(scheduler, this, nextPos);
