@@ -38,9 +38,12 @@ sapling images/sapling1.png
 sapling images/sapling2.png
 sapling images/sapling3.png
 sapling images/sapling4.png
-yetti images/yetti0.png
-yetti images/yetti1.png
-yetti images/yetti2.png
-yetti images/yetti3.png
-cave images/cave0.png 255 255 255 0
-ice images/ice.png
+yeti images/yeti0.png
+yeti images/yeti1.png
+yeti images/yeti2.png
+yeti images/yeti3.png
+yetiDude images/yetiDude0.png
+yetiDude images/yetiDude1.png
+yetiDude images/yetiDude2.png
+yetiDude images/yetiDude3.png
+cave images/freeze4.bmp 255 255 255 0
