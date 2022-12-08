@@ -1,4 +1,6 @@
+import processing.core.PFont;
 import processing.core.PImage;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +10,11 @@ import java.util.function.Predicate;
 
 public class RONNIE extends MovableEntity {
     public static final double RONNIE_ANIMATION_PERIOD = .15;
-    public static final double RONNIE_ACTION_PERIOD = .5;
+    public static final double RONNIE_ACTION_PERIOD = .075;
     public static final int RONNIE_NUM_PROPERTIES = 2;
     public static final String RONNIE_KEY = "ronnie";
+
+    PFont font;
     public RONNIE(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount, double actionPeriod, double animationPeriod, int health, int healthLimit) {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod, health, healthLimit);
     }
@@ -28,6 +32,7 @@ public class RONNIE extends MovableEntity {
 
                 world.addEntity(sapling);
                 sapling.scheduleActions(scheduler, world, imageStore);
+
             }
         }
 /*        else if (ronnieTarget.equals(YETI_SLEEPYTIME.class) && ronnieTarget.isPresent()){
