@@ -23,7 +23,11 @@ public class DUDEAFFLICTED extends MovableEntity {
             if (moveTo(world, dudeAfflictedTarget.get(), scheduler)) {
 
                 YETI_SLEEPYTIME sleepyYeti = new YETI_SLEEPYTIME("yetisleep" + this.getId(), tgtPos, imageStore.getImageList(YETI_SLEEPYTIME.YETI_SLEEPYTIME_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
-
+                DudeNotFull dude = new DudeNotFull("dude", this.getPosition(), imageStore.getImageList("dude"), 2,0,.35,1,1,1);
+                world.removeEntity(scheduler, this);
+                scheduler.unscheduleAllEvents(this);
+                world.addEntity(dude);
+                dude.scheduleActions(scheduler, world, imageStore);
                 world.addEntity(sleepyYeti);
             }
         }

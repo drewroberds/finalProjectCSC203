@@ -17,6 +17,9 @@ public class YetiFull extends Yeti {
 
         if (fullTarget.isPresent() && this.moveTo(world, fullTarget.get(), scheduler)) {
             this.transformYetiFull(world, scheduler, imageStore);
+            Counter counter = new Counter("couter", new Point(15,15), imageStore.getImageList("dude"), 1,1,1,1,1,1);
+//            world.addEntity(counter);
+            counter.scheduleActions(scheduler, world, imageStore);
         } else {
             scheduler.scheduleEvent(this, new ActivityAction(this, world, imageStore, 0), this.getActionPeriod());
         }
