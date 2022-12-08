@@ -35,11 +35,12 @@ public class RONNIE extends MovableEntity {
 
             }
         }
-/*        else if (ronnieTarget.equals(YETI_SLEEPYTIME.class) && ronnieTarget.isPresent()){
+ /*       else if (ronnieTarget.equals(YETI_SLEEPYTIME.class) && ronnieTarget.isPresent()){
             Point tgtPos = ronnieTarget.get().getPosition();
 
             if (moveTo(world, ronnieTarget.get(), scheduler)) {
-
+                world.removeEntity(scheduler, this);
+                scheduler.unscheduleAllEvents(this);
                 YetiNotFull yeti = new YetiNotFull("yeti" + this.getId(), tgtPos, imageStore.getImageList(YetiNotFull.YETI_KEY), getResourceLimit(), getResourceCount(), getActionPeriod(), getAnimationPeriod(), getHealth(), getHealthLimit());
 
                 world.addEntity(yeti);
